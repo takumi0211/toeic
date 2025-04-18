@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elegant Word Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Elegant Word Quiz</h1>
+    <div class="quiz-container" id="quiz-container">
+      <div class="home-screen">
+        <h2>テストする単語数を<br>選んでください</h2>
+        <div class="word-count-options">
+          <button class="word-count-btn" data-count="10">
+            <span class="count">10</span>
+            <span class="label">単語</span>
+          </button>
+          <button class="word-count-btn" data-count="30">
+            <span class="count">30</span>
+            <span class="label">単語</span>
+          </button>
+          <button class="word-count-btn" data-count="100">
+            <span class="count">100</span>
+            <span class="label">単語</span>
+          </button>
+          <button class="word-count-btn" data-count="0">
+            <span class="count">全部</span>
+            <span class="label">単語</span>
+          </button>
+        </div>
+        <p class="total-words">総単語数: ${words.length}語</p>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

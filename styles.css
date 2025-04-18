@@ -1,0 +1,513 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 0.5rem;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 0.8rem;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.quiz-container {
+    background: white;
+    padding: 0.8rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.word-display {
+    text-align: center;
+    margin-bottom: 0.4rem;
+}
+
+.word-display p {
+    font-size: 2rem;
+    color: #34495e;
+    font-weight: bold;
+    margin: 0.2rem 0;
+}
+
+.choices-container {
+    display: grid;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.choice-btn {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    color: #2c3e50;
+    min-height: 52px;
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+}
+
+.choice-btn:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.choice-btn.correct {
+    background: #27ae60;
+    color: white;
+    border-color: #27ae60;
+}
+
+.choice-btn.incorrect {
+    background: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+.choice-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.result {
+    text-align: center;
+    margin: 1rem 0;
+    min-height: 24px;
+}
+
+.progress {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.3rem;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* ホーム画面のスタイル改善 */
+.home-screen {
+    text-align: center;
+    padding: 0.8rem;
+}
+
+.home-screen h2 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.3;
+}
+
+.word-count-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2列のグリッドに変更 */
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+.word-count-btn {
+    width: 100%;
+    padding: 1rem 0.5rem;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #2c3e50;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.2;
+}
+
+.word-count-btn:active {
+    background: #f8f9fa;
+    transform: scale(0.98);
+}
+
+.word-count-btn span {
+    display: block;
+}
+
+.word-count-btn .count {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #3498db;
+    margin-bottom: 0.2rem;
+}
+
+.word-count-btn .label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.total-words {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    .word-count-btn {
+        background: #f8f9fa;
+    }
+}
+
+/* スマートフォン向けの調整 */
+@media screen and (max-width: 428px) {
+    .home-screen h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .word-count-btn {
+        padding: 0.8rem 0.5rem;
+    }
+
+    .word-count-btn .count {
+        font-size: 1.2rem;
+    }
+}
+
+/* 結果画面のスタイル改善 */
+.result-summary {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 1rem 0 1.5rem;
+    color: #2c3e50;
+}
+
+.missed-words {
+    margin-bottom: 1.5rem;
+}
+
+.missed-words h3 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.missed-words-list {
+    margin-bottom: 1.5rem;
+}
+
+.missed-word-item {
+    padding: 0.8rem 1rem;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 45px;
+    background: #f8f9fa;
+}
+
+.missed-word-item .word {
+    font-weight: 600;
+    color: #e74c3c;
+    font-size: 1rem;
+}
+
+.missed-word-item .meaning {
+    color: #2c3e50;
+    font-size: 0.95rem;
+    text-align: right;
+    margin-left: 1rem;
+}
+
+.perfect-score {
+    text-align: center;
+    color: #27ae60;
+    font-size: 1.1rem;
+    margin: 2rem 0;
+    font-weight: 500;
+}
+
+.retry-btn {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    min-height: 45px;
+    border-radius: 10px;
+    border: none;
+    background: #f8f9fa;
+    color: #2c3e50;
+    border: 2px solid #e9ecef;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-appearance: none;
+}
+
+.retry-btn:active {
+    transform: scale(0.98);
+    background: #e9ecef;
+}
+
+#retry-missed {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    margin-bottom: 1rem;
+}
+
+#retry-missed:active {
+    background: #c0392b;
+}
+
+/* スマートフォン向けの追加調整 */
+@media screen and (max-width: 428px) {
+    .result-summary {
+        font-size: 1.1rem;
+        margin: 0.8rem 0 1.2rem;
+    }
+
+    .missed-word-item {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .missed-word-item .word {
+        font-size: 0.95rem;
+    }
+
+    .missed-word-item .meaning {
+        font-size: 0.9rem;
+    }
+
+    .retry-btn {
+        padding: 0.7rem;
+        font-size: 1rem;
+        min-height: 42px;
+    }
+
+    .perfect-score {
+        font-size: 1rem;
+        margin: 1.5rem 0;
+    }
+}
+
+/* 長い単語や意味のための対応 */
+@media screen and (max-width: 360px) {
+    .missed-word-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.8rem;
+    }
+
+    .missed-word-item .word {
+        margin-bottom: 0.3rem;
+    }
+
+    .missed-word-item .meaning {
+        margin-left: 0;
+        text-align: left;
+    }
+}
+
+/* タイムバーのスタイル */
+.timer-bar-container {
+    width: 100%;
+    height: 4px;
+    background-color: #e9ecef;
+    border-radius: 2px;
+    margin-bottom: 0.4rem;
+    overflow: hidden;
+}
+
+.timer-bar {
+    width: 100%;
+    height: 100%;
+    background-color: #3498db;
+    transition: width linear;
+}
+
+.timer-bar.warning {
+    background-color: #f1c40f;
+}
+
+.timer-bar.danger {
+    background-color: #e74c3c;
+}
+
+/* モバイル最適化のスタイルを追加・修正 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.quiz-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.word-display {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.word-display p {
+    font-size: 2.5rem;
+    color: #34495e;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+/* 選択肢ボタンのスタイル改善 */
+.choice-btn {
+    width: 100%;
+    padding: 1.2rem;
+    margin-bottom: 0.8rem;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    color: #2c3e50;
+    min-height: 60px;
+    -webkit-appearance: none;
+}
+
+/* ホーム画の単語数選択ボタン */
+.word-count-btn {
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #2c3e50;
+    min-height: 70px;
+    -webkit-appearance: none;
+}
+
+/* タイムバーのスタイル調整 */
+.timer-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+/* 結果表示画面の調整 */
+.missed-word-item {
+    padding: 1.2rem;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 60px;
+}
+
+.retry-btn {
+    width: 100%;
+    padding: 1.2rem;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    min-height: 60px;
+    border-radius: 12px;
+    -webkit-appearance: none;
+}
+
+/* スコアと問題数の表示を大きく */
+.progress {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.2rem;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+/* アクティブ状態のスタイル調整 */
+.choice-btn:active, .word-count-btn:active, .retry-btn:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+/* iPhoneのセーフエリアに対応 */
+@supports (padding: max(0px)) {
+    .container {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+}
+
+/* 縦向き時のスタイル */
+@media screen and (max-width: 428px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .quiz-container {
+        padding: 0.8rem;
+    }
+
+    .word-display p {
+        font-size: 2rem;
+    }
+
+    .choice-btn, .word-count-btn {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    h1 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+} 
